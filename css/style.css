@@ -14,6 +14,8 @@
   --background-icon-color: rgba(255, 255, 255, 0.1);
   --address-main-color: rgba(255, 255, 255, 0.6);
   --thumb-hover-color: rgba(33, 150, 243, 0.9);
+  --transition-time: 250ms;
+  --function-time: cubic-bezier(0.4, 0, 0.2, 1);
 }
 html {
   box-sizing: border-box;
@@ -165,6 +167,7 @@ img {
   right: 0;
 
   content: '';
+
   min-width: 100%;
   min-height: 4px;
 
@@ -182,6 +185,8 @@ img {
   line-height: 1.14;
   letter-spacing: 0.02em;
   text-decoration: none;
+
+  transition: color var(--transition-time) var(--function-time);
 }
 .header-link {
   color: inherit;
@@ -222,6 +227,8 @@ img {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   color: var(--main-light-color);
   background-color: var(--accent-color);
+
+  transform: background-color var(--transition-time) var(--function-time);
 }
 .hero-btn:hover,
 .hero-btn:focus {
@@ -236,16 +243,22 @@ img {
   z-index: 2;
 
   background: rgba(0, 0, 0, 0.2);
+
+  transition: opacity var(--transition-time) var(--function-time);
 }
 .backdrop.is-hidden {
   opacity: 0;
   pointer-events: none;
 }
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(1.2);
+}
 .modal {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1);
+  transition: var(--transition-time) var(--function-time);
 
   min-width: 528px;
   min-height: 581px;
@@ -403,6 +416,9 @@ img {
   min-height: 44px;
   border-radius: 50%;
   color: var(--first-icon-color);
+
+  transition: background-color var(--transition-time) var(--function-time),
+    color var(--transition-time) var(--function-time);
 }
 .team-link:hover,
 .team-link:focus {
@@ -436,6 +452,9 @@ img {
   border: 1px solid var(--first-icon-color);
   border-radius: 4px;
   color: var(--first-icon-color);
+
+  transition: border-color var(--transition-time) var(--function-time),
+    color var(--transition-time) var(--function-time);
 }
 .clients-link:hover,
 .clients-link:focus {
@@ -464,6 +483,10 @@ img {
   background: var(--first-btn-color);
   line-height: 1.6;
   font-weight: 500;
+
+  transition: background-color var(--transition-time) var(--function-time),
+    color var(--transition-time) var(--function-time),
+    box-shadow var(--transition-time) var(--function-time);
 }
 .filter-btn:hover,
 .filter-btn:focus {
@@ -491,9 +514,11 @@ img {
   margin-bottom: var(--item-space-gap);
 
   border-bottom: 1px solid var(--border-line-color);
+  transition: box-shadow var(--transition-time) var(--function-time);
 }
-.portfolio-link:hover,
-.portfolio-link:focus {
+
+.portfolio-item:hover,
+.portfolio-item:focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
 }
@@ -502,15 +527,21 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
-.portfolio-thumb::before {
-  display: inline-block;
+.portfolio-overlay {
   position: absolute;
-  content: '';
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
+
+  font-size: 18px;
+  line-height: 1.55;
   background: var(--thumb-hover-color);
-  opacity: 0;
+  transform: translateY(100%);
+  transition: transform var(--transition-time) var(--function-time);
 }
 .portfolio-text {
   position: absolute;
@@ -521,15 +552,12 @@ img {
   font-size: 18px;
   line-height: 1.55;
   color: var(--main-light-color);
-  opacity: 0;
+}
+.portfolio-item:hover .portfolio-overlay,
+.portfolio-item:focus .portfolio-overlay {
+  transform: translateY(0);
 }
 
-.portfolio-link:hover .portfolio-thumb::before,
-.portfolio-link:focus .portfolio-thumb::before,
-.portfolio-link:hover .portfolio-text,
-.portfolio-link:focus .portfolio-text {
-  opacity: 1;
-}
 .portfilio-content {
   padding: 20px 24px;
   border-bottom: 1px solid var(--border-line-color);
@@ -585,6 +613,9 @@ img {
   text-decoration: none;
   font-style: inherit;
 }
+.address-link {
+  transition: color var(--transition-time) var(--function-time);
+}
 .footer-logo {
   display: inline-block;
 }
@@ -619,6 +650,8 @@ img {
   border-radius: 50%;
   background: var(--background-icon-color);
   color: var(--main-light-color);
+
+  transition: background-color var(--transition-time) var(--function-time);
 }
 .join-link:hover,
 .join-link:focus {
